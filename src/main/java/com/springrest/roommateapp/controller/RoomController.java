@@ -1,8 +1,11 @@
 package com.springrest.roommateapp.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,4 +31,12 @@ public class RoomController {
 		return new ResponseEntity<RoomDto>(createdRoom,HttpStatus.CREATED);
 	}
 	
+	
+	// get by user
+	@GetMapping("/user/{userId}/rooms")
+	public ResponseEntity<List<RoomDto>> getRoomByUser(@PathVariable Long userId)
+	{
+		List<RoomDto> rooms = this.roomService.getRoomByUser(userId);
+		return new ResponseEntity<List<RoomDto>>(rooms,HttpStatus.OK);
+	}
 }
