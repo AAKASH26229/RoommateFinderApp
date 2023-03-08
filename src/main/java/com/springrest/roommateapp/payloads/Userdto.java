@@ -1,19 +1,44 @@
 package com.springrest.roommateapp.payloads;
 
+
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
 public class Userdto {
 
 	private long userid;
+	
+	@NotEmpty
+	@Size(min=4, message="First name should have minimum 4 characters")
 	private String fname;
+	@NotEmpty
+	@Size(min=4, message="Last name should have minimum 4 characters")
 	private String lname;
+	@NotEmpty
 	private String gender;
+	@NotEmpty
 	private String dob;
+	@NotEmpty
 	private String aadhar;
+	@NotEmpty
 	private String city;
+	@NotEmpty
 	private String state;
+	@NotEmpty
 	private String role;
+	@Email(message="Email address is not valid")
 	private String email;
+	@NotEmpty
 	private String mobile;
+	@NotEmpty
+	@Size(min=4,max=10, message="Username must be minimum of 4 characters and maximum of 10 characters")
 	private String username;
+	@NotEmpty
+//	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\\\S+$).{8, 20}$",message="Password must have at least 8 characters and at most 20 characters in combination of atleast 1 digit(0-9), 1 uppercase aphlabet(A-Z), 1 lowercase alphabet(a-z) and 1 special character ")
 	private String password;
 	
 	public Userdto() {

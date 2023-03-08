@@ -20,6 +20,8 @@ import com.springrest.roommateapp.payloads.ApiResponse;
 import com.springrest.roommateapp.payloads.Userdto;
 import com.springrest.roommateapp.services.UserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api")
 public class MyController {
@@ -36,7 +38,7 @@ public class MyController {
 	
 	// add new user
 		@PostMapping("/users")
-		public ResponseEntity<Userdto> addUser(@RequestBody Userdto userDto)
+		public ResponseEntity<Userdto> addUser(@Valid @RequestBody Userdto userDto)
 		{
 			Userdto addUserDto = this.userService.addUser(userDto);
 			return new ResponseEntity<>(addUserDto,HttpStatus.CREATED);
@@ -45,7 +47,7 @@ public class MyController {
 	
 		// update existing user
 		@PutMapping("/users/{userId}")
-		public ResponseEntity<Userdto> updateUser(@RequestBody Userdto userDto,@PathVariable Long userId)
+		public ResponseEntity<Userdto> updateUser(@Valid @RequestBody Userdto userDto,@PathVariable Long userId)
 		{
 			Userdto updatedUser =  this.userService.updateUser(userDto,userId);
 			return ResponseEntity.ok(updatedUser);
