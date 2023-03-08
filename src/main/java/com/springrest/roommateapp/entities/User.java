@@ -1,10 +1,12 @@
 package com.springrest.roommateapp.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -50,6 +52,11 @@ public class User {
 	
 	@Column(name="password", nullable=false, length=100)
 	private String password;
+	
+	
+	@OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+	private Room room;
+	
 	
 	
 	public User(long userid, String fname, String lname, String gender, String dob, String aadhar, String city,
