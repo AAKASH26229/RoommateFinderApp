@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long userid;
 	
 	@Column(name="first_name", nullable=false, length=100)
@@ -53,14 +53,29 @@ public class User {
 	@Column(name="password", nullable=false, length=100)
 	private String password;
 	
+	@Column(name="diet", nullable=false, length=100)
+	private String diet;
+	
+	@Column(name="shift", nullable=false, length=100)
+	private String shift;
+	
+	@Column(name="occupancy", nullable=false, length=100)
+	private String occupancy;
+	
 	
 	@OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
 	private Room room;
-	
-	
-	
+
+
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public User(long userid, String fname, String lname, String gender, String dob, String aadhar, String city,
-			String state, String role, String email, String mobile, String username, String password) {
+			String state, String role, String email, String mobile, String username, String password, String diet,
+			String shift, String occupancy) {
 		super();
 		this.userid = userid;
 		this.fname = fname;
@@ -75,12 +90,10 @@ public class User {
 		this.mobile = mobile;
 		this.username = username;
 		this.password = password;
-	}
-
-
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
+		this.diet = diet;
+		this.shift = shift;
+		this.occupancy = occupancy;
+		
 	}
 
 
@@ -214,12 +227,51 @@ public class User {
 	}
 
 
+	public String getDiet() {
+		return diet;
+	}
+
+
+	public void setDiet(String diet) {
+		this.diet = diet;
+	}
+
+
+	public String getShift() {
+		return shift;
+	}
+
+
+	public void setShift(String shift) {
+		this.shift = shift;
+	}
+
+
+	public String getOccupancy() {
+		return occupancy;
+	}
+
+
+	public void setOccupancy(String occupancy) {
+		this.occupancy = occupancy;
+	}
+
+
+
+
 	@Override
 	public String toString() {
 		return "User [userid=" + userid + ", fname=" + fname + ", lname=" + lname + ", gender=" + gender + ", dob="
 				+ dob + ", aadhar=" + aadhar + ", city=" + city + ", state=" + state + ", role=" + role + ", email="
-				+ email + ", mobile=" + mobile + ", username=" + username + ", password=" + password + "]";
+				+ email + ", mobile=" + mobile + ", username=" + username + ", password=" + password + ", diet=" + diet
+				+ ", shift=" + shift + ", occupancy=" + occupancy+"]";
 	}
+	
+	
+	
+	
+
+
 	
 	
 	

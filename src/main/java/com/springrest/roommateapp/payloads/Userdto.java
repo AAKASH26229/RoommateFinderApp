@@ -41,6 +41,15 @@ public class Userdto {
 //	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\\\S+$).{8, 20}$",message="Password must have at least 8 characters and at most 20 characters in combination of atleast 1 digit(0-9), 1 uppercase aphlabet(A-Z), 1 lowercase alphabet(a-z) and 1 special character ")
 	private String password;
 	
+	@NotEmpty
+	private String shift;
+	
+	@NotEmpty
+	private String diet;
+	
+	@NotEmpty
+	private String occupancy;
+	
 	public Userdto() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -149,6 +158,31 @@ public class Userdto {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public String getShift() {
+		return shift;
+	}
+
+	public void setShift(String shift) {
+		this.shift = shift;
+	}
+
+	public String getDiet() {
+		return diet;
+	}
+
+	public void setDiet(String diet) {
+		this.diet = diet;
+	}
+
+	public String getOccupancy() {
+		return occupancy;
+	}
+
+	public void setOccupancy(String occupancy) {
+		this.occupancy = occupancy;
+	}
+
 	
 	
 }

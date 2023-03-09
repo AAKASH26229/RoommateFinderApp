@@ -39,4 +39,5 @@ public class RoomController {
 		List<RoomDto> rooms = this.roomService.getRoomByUser(userId);
 		return new ResponseEntity<List<RoomDto>>(rooms,HttpStatus.OK);
 	}
+	
 }

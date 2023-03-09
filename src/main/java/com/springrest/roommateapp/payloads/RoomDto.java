@@ -11,12 +11,14 @@ import jakarta.validation.constraints.NotEmpty;
 public class RoomDto {
 
 	
-
+	private Long roomId;
+	
 	@NotEmpty(message="Double sharing or Triple Sharing")
 	private String occupancy;
 
 	
 	private Date addedDate;
+	
 	
 	private Userdto user;
 	
@@ -27,6 +29,15 @@ public class RoomDto {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Long getRoomId() {
+		return roomId;
+	}
+
+	public void setRoomId(Long roomId) {
+		this.roomId = roomId;
+	}
+
+	
 	public String getOccupancy() {
 		return occupancy;
 	}
