@@ -14,11 +14,11 @@ public interface RoomService {
 	
 	// update
 	
-	Room updateRoom(RoomDto roomDto,Long roomId);
+	RoomDto updateRoom(RoomDto roomDto,Long roomId);
 	
 	// delete 
 	
-	void deletePost(Long roomId);
+	void deleteRoom(Long roomId);
 	
 	// get all rooms
 	
@@ -26,13 +26,13 @@ public interface RoomService {
 	
 	// get single room details
 	
-	Room getRoomById(Long roomId);
+	RoomDto getRoomById(Long roomId);
 	
 	//get all room by user
 	
 	List<RoomDto> getRoomByUser(Long userId);
 	
 	// search room
-	List<Room> searchRoom(String keyword);
+	List<RoomDto> searchRoom(String keyword);
 	
 }

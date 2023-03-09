@@ -45,27 +45,33 @@ public class RoomServiceImpl implements RoomService{
 	}
 
 	@Override
-	public Room updateRoom(RoomDto roomDto, Long roomId) {
+	public RoomDto updateRoom(RoomDto roomDto, Long roomId) {
+		Room room = this.roomDao.findById(roomId).orElseThrow(()-> new ResourceNotFoundException("Room", "Room id", roomId));
+
+		room.setOccupancy(roomDto.getOccupancy());
+//		room.setUser(roomDto.getUser());
 		
-		
-		
-		return null;
+		Room updatedRoom = this.roomDao.save(room);
+		return this.modelMapper.map(updatedRoom, RoomDto.class);
 	}
 
 	@Override
-	public void deletePost(Long roomId) {
-		// TODO Auto-generated method stub
-		
+	public void deleteRoom(Long roomId) {
+
+		Room room = this.roomDao.findById(roomId).orElseThrow(()-> new ResourceNotFoundException("Room", "Room id", roomId));
+		this.roomDao.delete(room);
 	}
 
 	@Override
 	public List<RoomDto> getAllRoom() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Room> allRooms = this.roomDao.findAll();
+		List<RoomDto> roomDtos = allRooms.stream().map((room)-> this.modelMapper.map(room, RoomDto.class)).collect(Collectors.toList());
+		
+		return roomDtos;
 	}
 
 	@Override
-	public Room getRoomById(Long roomId) {
+	public RoomDto getRoomById(Long roomId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -81,7 +87,7 @@ public class RoomServiceImpl implements RoomService{
 	}
 
 	@Override
-	public List<Room> searchRoom(String keyword) {
+	public List<RoomDto> searchRoom(String keyword) {
 		// TODO Auto-generated method stub
 		return null;
 	}
