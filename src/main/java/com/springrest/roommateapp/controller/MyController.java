@@ -33,7 +33,7 @@ public class MyController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/")
+	@GetMapping("/home")
 	public String home()
 	{
 		return "index";
@@ -51,7 +51,7 @@ public class MyController {
 	{
 		userService.addUser(user);
 		session.setAttribute("message", "User registerd successfully!!");
-		return "redirect:/";
+		return "redirect:/login";
 	}
 	
 	@GetMapping("/login")
