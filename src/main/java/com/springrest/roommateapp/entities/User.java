@@ -23,7 +23,7 @@ public class User {
 	@Column(name="last_name", nullable=false, length=100)
 	private String lname;
 	
-	@Column(name="gender", nullable=false, length=100)
+	@Column(name="gender",  length=100)
 	private String gender;
 	
 	@Column(name="dateofbirth", nullable=false, length=100)
@@ -41,7 +41,7 @@ public class User {
 	@Column(name="role", nullable=false, length=100)
 	private String role;
 	
-	@Column(name="email" ,nullable=false, length=100)
+	@Column(name="email" ,nullable=false, length=100, unique=true)
 	private String email;
 	
 	@Column(name="mobile", nullable=false, length=100)
@@ -53,7 +53,7 @@ public class User {
 	@Column(name="password", nullable=false, length=100)
 	private String password;
 	
-	@Column(name="diet", nullable=false, length=100)
+	@Column(name="diet", length=100)
 	private String diet;
 	
 	@Column(name="shift", nullable=false, length=100)

@@ -2,6 +2,7 @@ package com.springrest.roommateapp.payloads;
 
 
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
