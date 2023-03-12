@@ -20,8 +20,9 @@ public interface UserService {
 	 void deleteUser(long userId);
 	 
 	 public Userdto getUserByEmailAndPass(String email,String password);
+	 
+	 List<Userdto> findMatchingUsersByHighPreference( String diet, String role, String gender, String shift, String state);
 
-
-	
+	 public List<Userdto> getMatchingUsers(long userId);
 
 }

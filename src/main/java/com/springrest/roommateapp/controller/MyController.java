@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.springrest.roommateapp.dao.UserDao;
 import com.springrest.roommateapp.entities.User;
 import com.springrest.roommateapp.payloads.ApiResponse;
+import com.springrest.roommateapp.payloads.RoomDto;
 import com.springrest.roommateapp.payloads.Userdto;
 import com.springrest.roommateapp.services.UserService;
 
@@ -88,6 +89,10 @@ public class MyController {
 		return "admin";
 	}
 
+	
+	
+	
+	
 	// add new user
 //	@PostMapping("/registration")
 //	public ResponseEntity<Userdto> addUser(@Valid @RequestBody Userdto userDto)
@@ -132,4 +137,11 @@ public class MyController {
 //			return ResponseEntity.ok(this.userService.getUser(userId));
 //		}
 //			
+	
+	@GetMapping("/users/{userId}/match-user")
+	public List<Userdto> getMatchingUsers(@PathVariable Long userId)
+	{
+		List<Userdto> user =this.userService.getMatchingUsers(userId);
+		return user;
+	}
 }
