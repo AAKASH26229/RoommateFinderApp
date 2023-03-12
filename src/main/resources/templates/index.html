@@ -134,7 +134,7 @@
                 <h5 class="card-title">Double Sharing</h5>
                 <p class="card-text">Some quick example text to build on the
                     card title and make up the bulk of the card's content.</p>
-                <a class="btn btn-primary" th:data-target="|#staticBackdrop${status.index}|" data-toggle="modal">Checkout</a>
+                <a class="btn btn-primary" data-target="#staticBackdrop" data-toggle="modal">Checkout</a>
 
                 
 			</div>
@@ -144,7 +144,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" th:id="|#staticBackdrop${status.index}|" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -161,7 +161,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
+        <a type="submit" th:href="@{/api/registration}" class="btn btn-primary">Understood</a>
       </div>
     </div>
   </div>

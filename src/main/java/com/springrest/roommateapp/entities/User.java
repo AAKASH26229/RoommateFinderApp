@@ -1,11 +1,17 @@
 package com.springrest.roommateapp.entities;
 
+import java.util.Collection;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -62,6 +68,13 @@ public class User {
 	@Column(name="occupancy", nullable=false, length=100)
 	private String occupancy;
 	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name="user_roles",
+				joinColumns = @JoinColumn(
+						name="user_id", referencedColumnName="userid"),
+				inverseJoinColumns = @JoinColumn(
+						name="role_id" , referencedColumnName="id"))
+	private Collection<Role> roles;
 	
 	@OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
 	private Room room;
@@ -73,9 +86,11 @@ public class User {
 	}
 
 
+	
+
 	public User(long userid, String fname, String lname, String gender, String dob, String aadhar, String city,
 			String state, String role, String email, String mobile, String username, String password, String diet,
-			String shift, String occupancy) {
+			String shift, String occupancy, Collection<Role> roles, Room room) {
 		super();
 		this.userid = userid;
 		this.fname = fname;
@@ -93,8 +108,11 @@ public class User {
 		this.diet = diet;
 		this.shift = shift;
 		this.occupancy = occupancy;
-		
+		this.roles = roles;
+		this.room = room;
 	}
+
+
 
 
 	public long getUserid() {
@@ -102,9 +120,13 @@ public class User {
 	}
 
 
+
+
 	public void setUserid(long userid) {
 		this.userid = userid;
 	}
+
+
 
 
 	public String getFname() {
@@ -112,9 +134,13 @@ public class User {
 	}
 
 
+
+
 	public void setFname(String fname) {
 		this.fname = fname;
 	}
+
+
 
 
 	public String getLname() {
@@ -122,9 +148,13 @@ public class User {
 	}
 
 
+
+
 	public void setLname(String lname) {
 		this.lname = lname;
 	}
+
+
 
 
 	public String getGender() {
@@ -132,9 +162,13 @@ public class User {
 	}
 
 
+
+
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+
+
 
 
 	public String getDob() {
@@ -142,9 +176,13 @@ public class User {
 	}
 
 
+
+
 	public void setDob(String dob) {
 		this.dob = dob;
 	}
+
+
 
 
 	public String getAadhar() {
@@ -152,9 +190,13 @@ public class User {
 	}
 
 
+
+
 	public void setAadhar(String aadhar) {
 		this.aadhar = aadhar;
 	}
+
+
 
 
 	public String getCity() {
@@ -162,9 +204,13 @@ public class User {
 	}
 
 
+
+
 	public void setCity(String city) {
 		this.city = city;
 	}
+
+
 
 
 	public String getState() {
@@ -172,9 +218,13 @@ public class User {
 	}
 
 
+
+
 	public void setState(String state) {
 		this.state = state;
 	}
+
+
 
 
 	public String getRole() {
@@ -182,9 +232,13 @@ public class User {
 	}
 
 
+
+
 	public void setRole(String role) {
 		this.role = role;
 	}
+
+
 
 
 	public String getEmail() {
@@ -192,9 +246,13 @@ public class User {
 	}
 
 
+
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
 
 
 	public String getMobile() {
@@ -202,9 +260,13 @@ public class User {
 	}
 
 
+
+
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+
+
 
 
 	public String getUsername() {
@@ -212,9 +274,13 @@ public class User {
 	}
 
 
+
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+
 
 
 	public String getPassword() {
@@ -222,9 +288,13 @@ public class User {
 	}
 
 
+
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+
 
 
 	public String getDiet() {
@@ -232,9 +302,13 @@ public class User {
 	}
 
 
+
+
 	public void setDiet(String diet) {
 		this.diet = diet;
 	}
+
+
 
 
 	public String getShift() {
@@ -242,9 +316,13 @@ public class User {
 	}
 
 
+
+
 	public void setShift(String shift) {
 		this.shift = shift;
 	}
+
+
 
 
 	public String getOccupancy() {
@@ -252,8 +330,38 @@ public class User {
 	}
 
 
+
+
 	public void setOccupancy(String occupancy) {
 		this.occupancy = occupancy;
+	}
+
+
+
+
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+
+
+
+
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
+	}
+
+
+
+
+	public Room getRoom() {
+		return room;
+	}
+
+
+
+
+	public void setRoom(Room room) {
+		this.room = room;
 	}
 
 
@@ -264,20 +372,12 @@ public class User {
 		return "User [userid=" + userid + ", fname=" + fname + ", lname=" + lname + ", gender=" + gender + ", dob="
 				+ dob + ", aadhar=" + aadhar + ", city=" + city + ", state=" + state + ", role=" + role + ", email="
 				+ email + ", mobile=" + mobile + ", username=" + username + ", password=" + password + ", diet=" + diet
-				+ ", shift=" + shift + ", occupancy=" + occupancy+"]";
+				+ ", shift=" + shift + ", occupancy=" + occupancy + ", roles=" + roles + ", room=" + room + "]";
 	}
-	
-	
-	
-	
+
+
 
 
 	
-	
-	
-	
-	
-	
-
 }
 

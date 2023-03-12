@@ -18,6 +18,8 @@ public interface UserService {
 	 List<Userdto> getUsers();
 	 
 	 void deleteUser(long userId);
+	 
+	 public Userdto getUserByEmailAndPass(String email,String password);
 
 
 	

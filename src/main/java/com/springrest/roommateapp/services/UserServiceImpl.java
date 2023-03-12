@@ -152,4 +152,12 @@ public class UserServiceImpl implements UserService {
 		return userDto;
 	}
 	
+	
+	public Userdto getUserByEmailAndPass(String email,String password)
+	{
+		User u = this.userDao.getUserByEmailAndPass(email, password);
+		Userdto userDtos = this.modelMapper.map(u, Userdto.class);
+		return userDtos;
+	}
+	
 }

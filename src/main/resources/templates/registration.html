@@ -61,47 +61,54 @@
 								<h2 class="text-uppercase text-center mb-5">Create an
 									account</h2>
 
+<!-- Message -->
+
+	<div th:if="${param.success}">
+	<div class="alert alert-success" >You have successfully registered!!</div>
+
+		</div>
+
 								<form id="register" th:action="@{/api/registration}"
-									method="post">
+									method="post" th:object="${user}">
 
 									<div class="form-row mb-4">
 										<div class="col">
 											<!-- First name -->
 											<input type="text" name="fname"
 												id="defaultRegisterFormFirstName" class="form-control form-control-lg"
-												placeholder="First name" required>
+												placeholder="First name" th:field="*{fname}" required>
 										</div>
 										<div class="col">
 											<!-- Last name -->
 											<input type="text" name="lname"
 												id="defaultRegisterFormLastName" class="form-control form-control-lg"
-												placeholder="Last name" required>
+												placeholder="Last name" th:field="*{lname}" required>
 										</div>
 									</div>
 
 
 									<div class="form-outline mb-4">
 										<input placeholder="Date of Birth" class="form-control form-control-lg mb-4"
-											type="date" id="dob" name="dob" required> 
+											type="date" id="dob" name="dob" th:field="*{dob}" required> 
 									</div>
 
 									<div class="form-outline mb-4">
 										<input class="form-control form-control-lg mb-4" type="number"
-											placeholder="Enter Aadhar Number" name="aadhar" id="aadhar"
+											placeholder="Enter Aadhar Number" name="aadhar" id="aadhar" th:field="*{aadhar}"
 											required> 
 									</div>
 
 
 									<div class="form-outline mb-4">
 										<input class="form-control form-control-lg mb-4" type="text"
-											placeholder="Enter City" id="city" name="city" required>
+											placeholder="Enter City" id="city" name="city" th:field="*{city}" required>
 										
 									</div>
 
 
 									<div class="form-outline mb-4">
 										<input class="form-control form-control-lg mb-4" type="text"
-											placeholder="Enter State" name="state" id="state" required>
+											placeholder="Enter State" name="state" id="state" th:field="*{state}" required>
 					
 									</div>
 
@@ -110,27 +117,27 @@
 										<input type="number" id="defaultRegisterPhonePassword"
 											name="mobile" class="form-control form-control-lg"
 											placeholder="Enter Phone Number"
-											aria-describedby="defaultRegisterFormPhoneHelpBlock" required>
+											aria-describedby="defaultRegisterFormPhoneHelpBlock" th:field="*{mobile}" required>
 										
 									</div>
 
 									<div class="form-outline mb-4">
 										<input name="email" type="email" id="form3Example3cg"
-										placeholder="Enter Your Email"	class="form-control form-control-lg" required/> 									</div>
+										placeholder="Enter Your Email"	class="form-control form-control-lg" th:field="*{email}" required/> 									</div>
 
 									<div class="form-outline mb-4">
 										<input name="username" type="text" id="form3Example4cg"
-										placeholder="Enter User Name"	class="form-control form-control-lg" required/> 
+										placeholder="Enter User Name"	class="form-control form-control-lg"  th:field="*{username}" required/> 
 									</div>
 
 									<div class="form-outline mb-4">
 										<input name="password" type="password" id="form3Example4cdg"
-										placeholder="Enter Password"	class="form-control form-control-lg" required/> 
+										placeholder="Enter Password"	class="form-control form-control-lg" th:field="*{password}" required/> 
 									</div>
 
 									<select name="gender" id="gender"
-										class="browser-default custom-select form-control" required>
-										<option >Open this to select gender</option>
+										class="browser-default custom-select form-control" th:field="*{gender}" required>
+										<option value="male" >Open this to select gender</option>
 										<option value="male">Male</option>
 										<option value="female">Female</option>
 									</select><br>
@@ -140,8 +147,8 @@
 									<!--Role  -->
 								
 									<select name="role" id="role"
-										class="browser-default custom-select" required>
-										<option >Open this to select role</option>
+										class="browser-default custom-select" th:field="*{role}" required>
+										<option value="student">Open this to select role</option>
 										<option value="working">Working</option>
 										<option value="student">Student</option>
 									</select><br>
@@ -150,8 +157,8 @@
 									<!-- Diet -->
 									
 									<select name="diet" id="diet"
-										class="browser-default custom-select" required>
-										<option >Open this to select diet</option>
+										class="browser-default custom-select"  th:field="*{diet}" required>
+										<option value="veg">Open this to select diet</option>
 										<option default value="veg">Veg</option>
 										<option value="nonveg">Non-Veg</option>
 									</select><br>
@@ -161,8 +168,8 @@
 									<!-- Shift -->
 									
 									<select name="shift" id="shift"
-										class="browser-default custom-select" required>
-										<option >Open this to select shift</option>
+										class="browser-default custom-select" th:field="*{shift}" required>
+										<option value="morning">Open this to select shift</option>
 										<option value="morning">Morning</option>
 										<option value="night">Night</option>
 									</select><br>
@@ -171,8 +178,8 @@
 									<!-- Occupancy -->
 									
 									<select name="occupancy" id="occupancy"
-										class="browser-default custom-select" required>
-										<option >Open this to select occupancy</option>
+										class="browser-default custom-select" th:field="*{occupancy}" required>
+										<option value="double" >Open this to select occupancy</option>
 										<option value="double">Double</option>
 										<option value="triple">Triple</option>
 									</select><br>
