@@ -31,8 +31,43 @@
 			</div>
 		</div>
 
-	</section>
+	
 
+		<div>
+			<h1>All Users</h1>
+			<div id="content">
+
+			</div>
+		</div>
+
+		<script>
+			var content = document.getElementById("content")
+
+			function modifyContent(data) {
+				console.log(data)
+				s = "";
+				for (var user of data) {
+					console.log(user)
+					s += `<div class="card" style="width: 18rem;">
+
+  <div class="card-body">
+    <h5 class="card-title">${user.username}</h5>
+    <p class="card-text">Firstname: ${user.fname}</p>
+        <p class="card-text">LastName: ${user.fname}</p>
+            <p class="card-text">Occupancy: ${user.occupancy}</p>
+               <p class="card-text">Dob: ${user.dob}</p> 
+    
+    <a href="/api/view-a-user?user_id=${user.userid}" class="btn btn-primary">View User</a>
+  </div>
+</div>`
+				}
+				content.innerHTML = s
+			}
+
+			fetch("/api/users")
+				.then((response) => response.json())
+				.then((data) => modifyContent(data));
+		</script>
 
 	</section>
 </body>

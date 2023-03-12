@@ -31,8 +31,56 @@
 			</div>
 		</div>
 
-	</section>
+	
 
+
+		<div>
+			<h1>User</h1>
+			<div id="content">
+
+			</div>
+		</div>
+
+		<script th:inline="javascript">
+		/*<![CDATA[*/
+
+			var userId = /*[[${userId}]]*/ '';
+			console.log(userId)
+
+			/*]]>*/
+			var content = document.getElementById("content")
+
+			function del() {
+				fetch(`/api/users/${userId}`, { method: 'DELETE' })
+					.then(() => history.back());
+
+			}
+
+			function modifyContent(user) {
+				console.log(user)
+				s = "";
+
+				console.log(user)
+				s += `<div class="card" style="width: 18rem;">
+
+  <div class="card-body">
+    <h5 class="card-title">${user.username}</h5>
+    <p class="card-text">Firstname: ${user.fname}</p>
+        <p class="card-text">LastName: ${user.fname}</p>
+            <p class="card-text">Occupancy: ${user.occupancy}</p>
+               <p class="card-text">Dob: ${user.dob}</p> 
+    
+    <button onclick="del()" class="btn btn-primary">Delete User</button>
+  </div>
+</div>`
+
+				content.innerHTML = s
+			}
+
+			fetch(`/api/users/${userId}`)
+				.then((response) => response.json())
+				.then((data) => modifyContent(data));
+		</script>
 
 	</section>
 </body>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Admin Page</title>
+</head>
+
+<body>
+    <section>
+
+       <div class="wrapper d-flex">
+			<div class="sidebar">
+				<small class="text-muted pl-3">ADMIN PAGE</small>
+
+				<small class="text-muted px-3">USER DETAILS</small>
+				<ul>
+					<li><a href="/api/view-all-users"><i class="far fa-calendar-alt"></i>View All User</a></li>
+					<!-- <li><a href="#"><i class="fas fa-video"></i>View User</a></li> -->
+					<!-- <li><a href="#"><i class="fas fa-id-badge"></i>Delete User</a></li> -->
+				</ul>
+				<small class="text-muted px-3">ROOM DETAILS</small>
+				<ul>
+					<li><a href="/api/view-all-rooms"><i class="fas fa-external-link-alt"></i>View All Rooms</a></li>
+					<!-- <li><a href="#"><i class="fas fa-code"></i>View Room</a></li> -->
+					<!-- <li><a href="#"><i class="fas fa-code"></i>Add Room</a></li> -->
+					<!-- <li><a href="#"><i class="fas fa-code"></i>Delete Room</a></li> -->
+				</ul>
+			</div>
+		</div>
+
+
+
+
+        <div>
+            <h1>All Rooms</h1>
+            <div id="content">
+
+            </div>
+        </div>
+
+        <script>
+            var content = document.getElementById("content")
+
+            function modifyContent(data) {
+                console.log(data)
+                s = "";
+                for (var room of data) {
+                    console.log(room)
+                    s += `<div class="card" style="width: 18rem;">
+
+  <div class="card-body">
+    <p class="card-text">Added On: ${room.addedDate}</p>
+        <p class="card-text">Occupancy: ${room.occupancy}</p>
+    
+    <a href="/api/view-a-room?room_id=${room.roomId}" class="btn btn-primary">View Room</a>
+  </div>
+</div>`
+                }
+                content.innerHTML = s
+            }
+
+            fetch("/api/rooms")
+                .then((response) => response.json())
+                .then((data) => modifyContent(data));
+        </script>
+
+    </section>
+</body>
+
+</html>

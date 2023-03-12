@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Match Page</title>
+</head>
+
+<body>
+    <section>
+
+        <h1>My Matches</h1>
+        <div>
+            <div id="content">
+
+            </div>
+        </div>
+
+        <script>
+            var content = document.getElementById("content")
+
+            function modifyContent(data) {
+                console.log(data)
+                s = "";
+                for (var user of data) {
+                    console.log(user)
+                    s += `<div class="card" style="width: 18rem;">
+
+  <div class="card-body">
+    <h5 class="card-title">${user.username}</h5>
+    <p class="card-text">Firstname: ${user.fname}</p>
+        <p class="card-text">LastName: ${user.fname}</p>
+            <p class="card-text">Occupancy: ${user.occupancy}</p>
+            <p class="card-text">Contact: ${user.mobile}</p>
+               <p class="card-text">Dob: ${user.dob}</p> 
+    
+  </div>
+</div>`
+                }
+                content.innerHTML = s
+            }
+
+            fetch(`/api/users/4/match-user`)
+                .then((response) => response.json())
+                .then((data) => modifyContent(data));
+        </script>
+
+    </section>
+
+
+</body>
+
+</html>
