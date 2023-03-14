@@ -10,7 +10,8 @@
 
 <body>
     <section>
-
+<div class="row d-flex">
+			<div class="col-md-6 p-5">
         <div class="wrapper d-flex">
 			<div class="sidebar">
 				<small class="text-muted pl-3">ADMIN PAGE</small>
@@ -42,7 +43,7 @@
 
             </div>
         </div>
-
+</div>
         <script th:inline="javascript">
             /*<![CDATA[*/
 
@@ -78,7 +79,7 @@
                 .then((response) => response.json())
                 .then((data) => modifyContent(data));
         </script>
-
+</div>
     </section>
 </body>
 

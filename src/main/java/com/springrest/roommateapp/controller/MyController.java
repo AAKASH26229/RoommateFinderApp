@@ -41,8 +41,6 @@ public class MyController {
 	@GetMapping("/home")
 	public String home(Model model) {
 
-		model.addAttribute("name", "rohit");
-
 		return "index";
 	}
 
@@ -129,6 +127,13 @@ public class MyController {
 	@GetMapping("/admin")
 	public String admin() {
 		return "admin";
+	}
+	
+	@GetMapping("/contact")
+	public String contact()
+	{
+		return "contact";
+		
 	}
 
 	// add new user

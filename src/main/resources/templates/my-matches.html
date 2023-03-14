@@ -10,7 +10,7 @@
 
 <body>
     <section>
-
+<div class="row mx-auto">
         <h1>My Matches</h1>
         <div>
             <div id="content">
@@ -26,17 +26,22 @@
                 s = "";
                 for (var user of data) {
                     console.log(user)
-                    s += `<div class="card" style="width: 18rem;">
-
+                    s += `
+                    	<div class="col-md-6 p-5">
+                    <div class="card" style="width: 18rem;">
+                    	
+            			
   <div class="card-body">
     <h5 class="card-title">${user.username}</h5>
     <p class="card-text">Firstname: ${user.fname}</p>
-        <p class="card-text">LastName: ${user.fname}</p>
+        <p class="card-text">LastName: ${user.lname}</p>
             <p class="card-text">Occupancy: ${user.occupancy}</p>
             <p class="card-text">Contact: ${user.mobile}</p>
                <p class="card-text">Dob: ${user.dob}</p> 
+               <p class="card-text">State: ${user.state}</p>
     
   </div>
+</div>
 </div>`
                 }
                 content.innerHTML = s
@@ -46,7 +51,7 @@
                 .then((response) => response.json())
                 .then((data) => modifyContent(data));
         </script>
-
+</div>
     </section>
 
 
