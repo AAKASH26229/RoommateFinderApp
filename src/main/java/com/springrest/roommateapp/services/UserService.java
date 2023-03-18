@@ -24,5 +24,7 @@ public interface UserService {
 	 List<Userdto> findMatchingUsersByHighPreference( String diet, String role, String gender, String shift, String state);
 
 	 public List<Userdto> getMatchingUsers(long userId);
+	 
+	 public User getUserByEmail(String email);
 
 }

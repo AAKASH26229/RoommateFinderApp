@@ -10,6 +10,9 @@ import java.util.List;
 
 public interface UserDao extends JpaRepository<User, Long> {
 	
+	
+	public User findByEmail(String email);
+	
 	@Query(value = "select * from users u where u.email = ?1   and u.password=?2", nativeQuery = true)
 	User getUserByEmailAndPass(String email, String password);
 	

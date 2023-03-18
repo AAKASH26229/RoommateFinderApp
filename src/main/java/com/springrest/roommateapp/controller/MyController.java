@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -28,6 +31,8 @@ import com.springrest.roommateapp.payloads.RoomDto;
 import com.springrest.roommateapp.payloads.Userdto;
 import com.springrest.roommateapp.services.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -44,36 +49,13 @@ public class MyController {
 		return "index";
 	}
 
-	@GetMapping("/view-all-users")
-	public String viewAllUsers() {
-		return "admin-view-all-users";
-	}
-
+	
 	@GetMapping("/matches")
 	public String viewAllMatches() {
 		return "my-matches";
 	}
 
-	@GetMapping("/view-a-user")
-	public String viewAUser(@RequestParam("user_id") String itemId, Model model) {
-		System.out.println(itemId);
-
-		model.addAttribute("userId", itemId);
-		return "admin-view-a-user";
-	}
-
-	@GetMapping("/view-all-rooms")
-	public String viewAllRooms() {
-		return "admin-view-all-rooms";
-	}
-
-	@GetMapping("/view-a-room")
-	public String viewARoom(@RequestParam("room_id") String itemId, Model model) {
-		System.out.println(itemId);
-
-		model.addAttribute("roomId", itemId);
-		return "admin-view-a-room";
-	}
+	
 
 	@ModelAttribute("user")
 	public Userdto userDto() {
@@ -88,7 +70,9 @@ public class MyController {
 
 	@PostMapping("/registration")
 	public String addUser(@ModelAttribute("user") Userdto userDto) {
+		userDto.setRole_user("ROLE_USER");
 		userService.addUser(userDto);
+		
 		// session.setAttribute("message", "User registerd successfully!!");
 		return "redirect:/api/registration?success";
 	}
@@ -98,24 +82,27 @@ public class MyController {
 		return "login";
 	}
 
-	@PostMapping("/login")
-	public String loginUser(ModelMap model, @RequestParam String email, @RequestParam String password,
-			HttpSession session) {
-		Userdto u = userService.getUserByEmailAndPass(email, password);
-		if (u != null) {
-			session.setAttribute("Userdto", u);
-			System.out.println(session.getAttribute("Userdto"));
-			return "redirect:/api/home";
-		} else {
-			session.setAttribute("msg", "Oops...Something went wrong..Try again....");
-			return "redirect:/api/login";
-		}
-
-	}
+//	@PostMapping("/login")
+//	public String loginUser(ModelMap model, @RequestParam String email, @RequestParam String password,
+//			HttpSession session) {
+//		Userdto u = userService.getUserByEmailAndPass(email, password);
+//		if (u != null) {
+//			session.setAttribute("Userdto", u);
+//			System.out.println(session.getAttribute("Userdto"));
+//			return "redirect:/api/home";
+//		} else {
+//			session.setAttribute("msg", "Oops...Something went wrong..Try again....");
+//			return "redirect:/api/login";
+//		}
+//
+//	}
 
 	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		session.removeAttribute("Userdto");
+	public String logout(HttpServletRequest request, HttpServletResponse response) {  
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();  
+        if (auth != null){      
+           new SecurityContextLogoutHandler().logout(request, response, auth);  
+        } 
 		return "redirect:/api/login";
 	}
 
@@ -124,10 +111,7 @@ public class MyController {
 		return "about";
 	}
 
-	@GetMapping("/admin")
-	public String admin() {
-		return "admin";
-	}
+	
 	
 	@GetMapping("/contact")
 	public String contact()
@@ -172,11 +156,7 @@ public class MyController {
 	//
 	//
 
-	// get single user through id
-	@GetMapping("/users/{userId}")
-	public ResponseEntity<Userdto> getUser(@PathVariable Long userId) {
-		return ResponseEntity.ok(this.userService.getUser(userId));
-	}
+	
 	//
 
 	@GetMapping("/users/{userId}/match-user")

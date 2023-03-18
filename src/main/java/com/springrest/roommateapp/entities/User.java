@@ -35,7 +35,7 @@ public class User {
 	@Column(name="dateofbirth", nullable=false, length=100)
 	private String dob;
 	
-	@Column(name="aadhar", nullable=false, length=100)
+	@Column(name="aadhar", nullable=true, length=100)
 	private String aadhar;
 	
 	@Column(name="city", nullable=false, length=100)
@@ -68,6 +68,23 @@ public class User {
 	@Column(name="occupancy", nullable=false, length=100)
 	private String occupancy;
 	
+	@Column(name="role_user", nullable=false)
+	private String role_user;
+	
+	
+	public String getRole_user() {
+		return role_user;
+	}
+
+
+
+
+	public void setRole_user(String role_user) {
+		this.role_user = role_user;
+	}
+
+
+
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name="user_roles",
 				joinColumns = @JoinColumn(
@@ -85,12 +102,9 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
-
-	
-
 	public User(long userid, String fname, String lname, String gender, String dob, String aadhar, String city,
 			String state, String role, String email, String mobile, String username, String password, String diet,
-			String shift, String occupancy, Collection<Role> roles, Room room) {
+			String shift, String occupancy, String role_user, Collection<Role> roles, Room room) {
 		super();
 		this.userid = userid;
 		this.fname = fname;
@@ -108,9 +122,11 @@ public class User {
 		this.diet = diet;
 		this.shift = shift;
 		this.occupancy = occupancy;
+		this.role_user = role_user;
 		this.roles = roles;
 		this.room = room;
 	}
+
 
 
 
@@ -372,7 +388,8 @@ public class User {
 		return "User [userid=" + userid + ", fname=" + fname + ", lname=" + lname + ", gender=" + gender + ", dob="
 				+ dob + ", aadhar=" + aadhar + ", city=" + city + ", state=" + state + ", role=" + role + ", email="
 				+ email + ", mobile=" + mobile + ", username=" + username + ", password=" + password + ", diet=" + diet
-				+ ", shift=" + shift + ", occupancy=" + occupancy + ", roles=" + roles + ", room=" + room + "]";
+				+ ", shift=" + shift + ", occupancy=" + occupancy + ", role_user=" + role_user + ", roles=" + roles
+				+ ", room=" + room + "]";
 	}
 
 

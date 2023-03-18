@@ -1,12 +1,8 @@
 package com.springrest.roommateapp.payloads;
 
-
-
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class Userdto {
@@ -23,7 +19,7 @@ public class Userdto {
 	private String gender;
 	@NotEmpty
 	private String dob;
-	@NotEmpty
+	
 	private String aadhar;
 	@NotEmpty
 	private String city;
@@ -51,9 +47,56 @@ public class Userdto {
 	@NotEmpty
 	private String occupancy;
 	
+	@Column(name="role_user", nullable=false)
+	private String role_user;
+	
 	public Userdto() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public Userdto(long userid,
+			@NotEmpty @Size(min = 4, message = "First name should have minimum 4 characters") String fname,
+			@NotEmpty @Size(min = 4, message = "Last name should have minimum 4 characters") String lname,
+			@NotEmpty String gender, @NotEmpty String dob, String aadhar, @NotEmpty String city, @NotEmpty String state,
+			@NotEmpty String role, @Email(message = "Email address is not valid") String email, @NotEmpty String mobile,
+			@NotEmpty @Size(min = 4, max = 10, message = "Username must be minimum of 4 characters and maximum of 10 characters") String username,
+			@NotEmpty String password, @NotEmpty String shift, @NotEmpty String diet, @NotEmpty String occupancy,
+			String role_user) {
+		super();
+		this.userid = userid;
+		this.fname = fname;
+		this.lname = lname;
+		this.gender = gender;
+		this.dob = dob;
+		this.aadhar = aadhar;
+		this.city = city;
+		this.state = state;
+		this.role = role;
+		this.email = email;
+		this.mobile = mobile;
+		this.username = username;
+		this.password = password;
+		this.shift = shift;
+		this.diet = diet;
+		this.occupancy = occupancy;
+		this.role_user = role_user;
+	}
+
+	@Override
+	public String toString() {
+		return "Userdto [userid=" + userid + ", fname=" + fname + ", lname=" + lname + ", gender=" + gender + ", dob="
+				+ dob + ", aadhar=" + aadhar + ", city=" + city + ", state=" + state + ", role=" + role + ", email="
+				+ email + ", mobile=" + mobile + ", username=" + username + ", password=" + password + ", shift="
+				+ shift + ", diet=" + diet + ", occupancy=" + occupancy + ", role_user=" + role_user + "]";
+	}
+
+	public String getRole_user() {
+		return role_user;
+	}
+
+	public void setRole_user(String role_user) {
+		this.role_user = role_user;
 	}
 
 	public long getUserid() {
